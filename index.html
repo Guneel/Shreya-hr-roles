@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <title>Shreya · Bengaluru HR Roles</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <p class="kicker">BENGALURU · DAILY ROLE RADAR</p>
+      <h1>HR systems & rewards roles</h1>
+      <p class="intro">A focused list of process-driven HR Tech, HRIS, Workday, SAP and compensation opportunities.</p>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Search titles, companies, skills…" aria-label="Search roles">
+        <select id="focus" aria-label="Filter by role family"><option value="">All role families</option></select>
+        <select id="status-filter" aria-label="Filter by application status"><option value="">All statuses</option></select>
+      </div>
+    </header>
+    <section class="stats" id="stats" aria-live="polite"></section>
+    <div class="updated" id="updated">Loading latest roles…</div>
+    <section class="grid" id="jobs" aria-live="polite"></section>
+    <section class="kit">
+      <h2>Make each application count</h2>
+      <div class="kit-grid">
+        <p><strong>Lead with process ownership.</strong> Highlight HR data quality, system administration, workflow configuration, controls and service delivery.</p>
+        <p><strong>Show measurable outcomes.</strong> Quantify payroll or compensation cycles, reporting improvements, UAT, releases, automation and error reduction.</p>
+        <p><strong>Track the next step.</strong> Update each role's status and notes. Your application tracking is saved in this browser.</p>
+      </div>
+    </section>
+    <footer>Always verify the source posting, location and closing date before applying.</footer>
+  </main>
+  <template id="card-template">
+    <article class="card">
+      <div class="tags"><span class="tag family"></span><span class="tag fit"></span></div>
+      <h2 class="title"></h2><p class="company"></p><p class="meta"></p>
+      <p class="why"></p><p class="note"></p>
+      <div class="card-bottom"><a class="source" target="_blank" rel="noreferrer">View source posting ↗</a><label class="status-label">Application status<select class="status"><option>Research</option><option>Saved</option><option>Applied</option><option>Interviewing</option><option>Closed</option></select></label></div>
+    </article>
+  </template>
+  <script src="app.js"></script>
+</body>
+</html>

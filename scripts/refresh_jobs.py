@@ -1,4 +1,4 @@
-"""Discover publicly indexed role links; never sign into or bypass job boards."""
+"""Discover publicly indexed HR technology and rewards job links."""
 from datetime import datetime, timezone, timedelta
 from html import unescape
 import json
@@ -11,20 +11,35 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "jobs.json"
 QUERIES = {
     "LinkedIn": [
-        "site:linkedin.com/jobs/view Bengaluru Workday HRIS",
-        "site:linkedin.com/jobs/view Bengaluru SAP SuccessFactors HRIS",
-        "site:linkedin.com/jobs/view Bengaluru compensation rewards HR",
+        "site:linkedin.com/jobs/view Bengaluru Workday HRIS analyst",
+        "site:linkedin.com/jobs/view Bengaluru SAP SuccessFactors consultant",
+        "site:linkedin.com/jobs/view Bengaluru SAP HCM payroll",
+        "site:linkedin.com/jobs/view Bengaluru HRIS systems analyst",
+        "site:linkedin.com/jobs/view Bengaluru compensation analyst total rewards",
+        "site:linkedin.com/jobs/view Bengaluru HR payroll operations consultant",
     ],
     "Naukri": [
-        "site:naukri.com/job-listings Bengaluru HRIS Workday SAP SuccessFactors",
-        "site:naukri.com/job-listings Bengaluru compensation benefits HR",
+        "site:naukri.com/job-listings Bengaluru Workday HRIS",
+        "site:naukri.com/job-listings Bengaluru SAP SuccessFactors consultant",
+        "site:naukri.com/job-listings Bengaluru SAP HCM payroll",
+        "site:naukri.com/job-listings Bengaluru HRIS systems analyst",
+        "site:naukri.com/job-listings Bengaluru compensation benefits analyst",
+        "site:naukri.com/job-listings Bengaluru total rewards payroll",
     ],
     "iimjobs": [
-        "site:iimjobs.com Bengaluru HRIS Workday SAP SuccessFactors",
-        "site:iimjobs.com Bengaluru compensation rewards benefits HR",
+        "site:iimjobs.com Bengaluru Workday HRIS",
+        "site:iimjobs.com Bengaluru SAP SuccessFactors HR systems",
+        "site:iimjobs.com Bengaluru SAP HCM payroll",
+        "site:iimjobs.com Bengaluru HRIS systems analyst",
+        "site:iimjobs.com Bengaluru compensation total rewards",
+        "site:iimjobs.com Bengaluru rewards benefits operations",
     ],
 }
-TERMS = ("hris", "workday", "sap", "successfactor", "compensation", "reward", "benefit", "hcm")
+TERMS = (
+    "hris", "workday", "sap", "successfactor", "compensation", "reward",
+    "benefit", "hcm", "payroll", "people systems", "hr technology",
+    "hr operations", "total rewards",
+)
 
 def clean(value):
     return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", "", value))).strip()
@@ -47,6 +62,8 @@ def role_family(title):
         return "SAP SuccessFactors"
     if any(word in text for word in ("compensation", "reward", "benefit")):
         return "Rewards / Compensation"
+    if "payroll" in text:
+        return "Payroll / HR Systems"
     return "HRIS / HR Technology"
 
 def main():

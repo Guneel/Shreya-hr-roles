@@ -1,5 +1,9 @@
 name: Refresh Bengaluru HR roles
 on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'data/jobs.json'
   schedule:
     - cron: '30 2 * * *'
   workflow_dispatch:

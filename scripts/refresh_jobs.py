@@ -27,11 +27,10 @@ QUERIES = {
 TERMS = ("hris", "workday", "sap", "successfactor", "compensation", "reward", "benefit", "hcm")
 
 def clean(value):
-    return re.sub(r"\\s+", " ", unescape(re.sub(r"<[^>]+>", "", value))).strip()
+    return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", "", value))).strip()
 
 def extract(html):
     found = []
-    # Search results provide a public title and a link back to the job board.
     pattern = r'<a[^>]+class="result__a"[^>]+href="([^"]+)"[^>]*>(.*?)</a>'
     for href, title in re.findall(pattern, html, re.S):
         href = unescape(href)
@@ -82,7 +81,7 @@ def main():
                 print(f"Search unavailable for {source}: {error}")
     payload["jobs"] = (discovered + payload.get("jobs", []))[:100]
     payload["updatedAt"] = datetime.now(timezone(timedelta(hours=5, minutes=30))).isoformat(timespec="seconds")
-    DATA.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+    DATA.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Added {len(discovered)} new results; retained {len(payload['jobs'])} total roles.")
 
 if __name__ == "__main__":
